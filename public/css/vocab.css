@@ -1,0 +1,253 @@
+/* ══════════════════════════════════════════════
+   vocab.css — 플래시카드 스타일
+   ══════════════════════════════════════════════ */
+
+/* ── 헤더 ── */
+.vocab-header {
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.vocab-progress-row {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.vp-label { font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.vp-counts { font-size: 14px; font-weight: 800; color: var(--text); }
+
+.vocab-progress-bar {
+  height: 6px; background: var(--bg-card2);
+  border-radius: 3px; overflow: hidden;
+}
+.vocab-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #4F8FFF, #A78BFA);
+  border-radius: 3px;
+  transition: width .4s ease;
+}
+
+/* ── 탭 ── */
+.vocab-tabs {
+  display: flex;
+  gap: 0;
+  background: var(--bg-card2, #F3F4F6);
+  border-radius: 12px;
+  padding: 4px;
+}
+.vtab-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 9px;
+  border: none;
+  background: transparent;
+  font-size: 13px; font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all .18s;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+}
+.vtab-btn.active {
+  background: #fff;
+  color: var(--blue, #2E6FD8);
+  box-shadow: 0 1px 4px rgba(0,0,0,.10);
+}
+.vu-count {
+  display: inline-flex;
+  align-items: center; justify-content: center;
+  min-width: 18px; height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  font-size: 10px; font-weight: 800;
+  background: #EF4444;
+  color: #fff;
+}
+
+/* ── 어려운 단어 뷰 ── */
+.vu-title {
+  font-size: 1.1rem; font-weight: 800; color: var(--text); margin: 0;
+}
+.vu-sub {
+  font-size: 0.83rem; color: var(--text-muted); margin: 2px 0 0;
+}
+.vu-empty {
+  text-align: center;
+  padding: 48px 20px;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+.vu-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  background: #fff;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 6px;
+  transition: border-color .12s;
+}
+.vu-row:hover { border-color: #C7D7F5; }
+.vu-row-main { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.vu-fr { font-size: 0.95rem; font-weight: 700; color: var(--text); }
+.vu-ph { font-size: 0.75rem; color: var(--primary, #2E6FD8); font-style: italic; }
+.vu-ko { font-size: 0.83rem; color: #4B5563; white-space: nowrap; }
+
+/* ── 카드 아레나 ── */
+.flashcard-arena {
+  position: relative;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 24px;
+  min-height: 240px;
+  padding: 12px 0;
+  user-select: none;
+}
+
+.flashcard-wrapper {
+  width: 100%; max-width: 360px;
+  perspective: 1200px;
+  cursor: pointer;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* 3D 뒤집기 카드 */
+.flashcard {
+  width: 100%;
+  aspect-ratio: 3/2;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform .5s cubic-bezier(.4,.2,.2,1);
+  border-radius: 20px;
+}
+
+.flashcard.flipped { transform: rotateY(180deg); }
+
+.fc-front, .fc-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 8px; padding: 20px 18px;
+  box-shadow: 0 6px 28px rgba(0,0,0,.10);
+}
+
+.fc-front {
+  background: linear-gradient(145deg, #EEF4FF, #F5F3FF);
+  border: 1px solid rgba(46,111,216,.18);
+}
+
+.fc-back {
+  background: linear-gradient(145deg, #F0F9FF, #EEF4FF);
+  border: 1px solid rgba(46,111,216,.22);
+  transform: rotateY(180deg);
+}
+
+.fc-category {
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 2px;
+  color: var(--text-muted);
+  display: flex; align-items: center; gap: 6px;
+}
+
+.fc-french {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; font-weight: 700;
+  text-align: center;
+  color: var(--blue);
+  line-height: 1.2;
+}
+
+.fc-phonetic {
+  font-size: 14px; color: var(--text-muted);
+  font-style: italic; letter-spacing: .5px;
+}
+
+.fc-english {
+  font-size: 22px; font-weight: 800; text-align: center;
+  color: var(--text);
+}
+
+.fc-example {
+  display: flex; flex-direction: column; gap: 4px;
+  text-align: center;
+  background: rgba(0,85,164,.05);
+  border-radius: 12px;
+  padding: 10px 14px;
+}
+.fc-ex-fr {
+  font-size: 14px; font-style: italic; color: #A78BFA;
+  line-height: 1.4;
+}
+.fc-ex-ko {
+  font-size: 12px; color: var(--text-muted);
+}
+
+.fc-tap-hint {
+  font-size: 11px; color: rgba(0,0,0,.28);
+  margin-top: 4px;
+}
+
+/* 배지 */
+.fc-badge {
+  padding: 2px 8px; border-radius: 8px;
+  font-size: 10px; font-weight: 700;
+  text-transform: none; letter-spacing: 0;
+}
+.fc-badge.new      { background: rgba(79,143,255,.2);  color: #4F8FFF; }
+.fc-badge.learning { background: rgba(251,191,36,.2);  color: #FBBF24; }
+.fc-badge.review   { background: rgba(167,139,250,.2); color: #A78BFA; }
+.fc-badge.mastered { background: rgba(52,211,153,.2);  color: #34D399; }
+
+/* 스켈레톤 */
+.fc-skeleton {
+  width: 60%; height: 40px;
+  background: linear-gradient(90deg, #DDE3EF 25%, #EEF2FA 50%, #DDE3EF 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 8px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+
+/* ── 평가 버튼 ── */
+.rating-buttons {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.rating-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 14px 10px;
+  border-radius: 16px;
+  font-size: 22px;
+  border: 1px solid var(--border);
+  background: var(--bg-card);
+  transition: transform .1s, background .2s;
+}
+.rating-btn span { font-size: 11px; font-weight: 700; }
+.rating-btn:active { transform: scale(.95); }
+
+.rating-btn.bad  { border-color: rgba(239,65,53,.3); }
+.rating-btn.bad:hover  { background: rgba(239,65,53,.1); }
+.rating-btn.meh  { border-color: rgba(251,191,36,.3); }
+.rating-btn.meh:hover  { background: rgba(251,191,36,.1); }
+.rating-btn.good { border-color: rgba(52,211,153,.3); }
+.rating-btn.good:hover { background: rgba(52,211,153,.1); }
+
+/* ── 완료 화면 ── */
+.vocab-done {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 16px; padding: 40px 20px;
+  text-align: center;
+}
+.vd-emoji { font-size: 64px; }
+.vocab-done h2 { font-size: 24px; font-weight: 800; }
+.vocab-done p  { color: var(--text-muted); font-size: 14px; }
