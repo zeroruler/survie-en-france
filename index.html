@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Survie en France</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=2" />
+</head>
+<body>
+
+  <!-- 비밀번호 오버레이 -->
+  <div id="pw-overlay">
+    <div class="pw-card">
+      <div class="pw-title">Survie en France</div>
+      <div class="pw-sub" id="pw-sub">비밀번호를 입력하세요</div>
+      <input class="pw-input" id="pw-input" type="text"
+             placeholder="아이디" autocomplete="username" />
+      <div class="pw-error" id="pw-error"></div>
+      <button class="btn-primary" id="pw-submit">시작하기</button>
+    </div>
+  </div>
+
+  <div id="app">
+    <main id="page-container">
+
+      <!-- 홈 대시보드 -->
+      <section id="page-dashboard" class="page active">
+        <div class="dash-brand">
+          <div class="dash-brand-name">Survie en France</div>
+        </div>
+
+        <div class="dash-hero">
+          <h1 class="dash-title">파리 실전 프랑스어</h1>
+          <p class="dash-sub">세 가지 모듈로 핵심 표현을 익혀보세요.</p>
+        </div>
+
+        <!-- 학습 모듈 뷰 -->
+        <div id="dash-modules-view">
+          <div class="module-grid">
+            <button class="module-card" data-page="vocab">
+              <div class="mc-body">
+                <div class="module-name">어휘 플래시카드</div>
+                <div class="module-desc">SRS 간격 반복으로 핵심 단어 암기</div>
+              </div>
+            </button>
+            <button class="module-card" data-page="grammar">
+              <div class="mc-body">
+                <div class="module-name">문법 드릴</div>
+                <div class="module-desc">규칙 학습 후 드래그로 문장 조립</div>
+              </div>
+            </button>
+            <button class="module-card" data-page="roleplay">
+              <div class="mc-body">
+                <div class="module-name">AI 롤플레이</div>
+                <div class="module-desc">Gemini AI와 실전 대화 연습</div>
+              </div>
+            </button>
+            <button class="module-card" data-page="handbook">
+              <div class="mc-body">
+                <div class="module-name">단어장</div>
+                <div class="module-desc">핸드북 단어 400개 카테고리별 브라우저</div>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <footer class="dash-footer">
+          <button id="footer-logout">로그아웃</button>
+          <span class="dash-footer-sep">·</span>
+          <button id="footer-reset">진행도 초기화</button>
+        </footer>
+
+      </section>
+
+      <style>
+        .hidden { display: none !important; }
+      </style>
+
+      <section id="page-vocab"     class="page"></section>
+      <section id="page-grammar"   class="page"></section>
+      <section id="page-roleplay"  class="page"></section>
+      <section id="page-handbook"  class="page"></section>
+
+    </main>
+  </div>
+
+  <script type="module" src="app.js?v=9"></script>
+</body>
+</html>

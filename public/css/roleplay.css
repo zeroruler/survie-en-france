@@ -1,0 +1,463 @@
+/* ══════════════════════════════════════════════
+   roleplay.css — AI 채팅 롤플레이
+   Apple/macOS Design System
+   ══════════════════════════════════════════════ */
+
+/* ── 시나리오 선택 화면 ── */
+#scenario-select {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.rp-header { display: flex; flex-direction: column; gap: 5px; }
+.rp-title  {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.5px;
+}
+.rp-sub {
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* ── API 키 섹션 ── */
+.api-key-section {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 14px;
+  padding: 18px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 580px;
+  transition: border-color .2s;
+}
+.api-key-section.api-key-saved {
+  border-color: rgba(22, 163, 74, 0.25);
+  background: rgba(240, 253, 244, 0.6);
+}
+
+.api-key-inner {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.api-key-icon  { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+.api-key-inner strong {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text);
+  display: block;
+}
+.api-key-inner p  {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.api-key-input-row { display: flex; gap: 8px; }
+.api-key-input-row input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 9px;
+  padding: 9px 12px;
+  color: var(--text);
+  font-size: 0.83rem;
+  font-family: 'SF Mono', 'Menlo', monospace;
+  transition: border-color .15s, box-shadow .15s;
+}
+.api-key-input-row input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: #fff;
+}
+.api-key-input-row button {
+  padding: 9px 18px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  font-size: 0.83rem;
+  font-weight: 600;
+  border-radius: 9px;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.2);
+  transition: opacity .15s;
+  white-space: nowrap;
+}
+.api-key-input-row button:hover { opacity: .88; }
+.api-key-input-row button:disabled { opacity: .5; cursor: not-allowed; }
+
+.api-key-hint  { font-size: 0.7rem; color: var(--text-muted); }
+.api-key-error {
+  font-size: 0.76rem;
+  color: #dc2626;
+  padding: 2px 0;
+}
+.api-key-change-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity .15s;
+}
+.api-key-change-btn:hover { opacity: .65; }
+
+/* ── 시나리오 카드 그리드 ── */
+.scenario-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 740px;
+}
+
+.scenario-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 14px;
+  padding: 18px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  transition: background .15s, border-color .15s, box-shadow .15s, transform .1s;
+}
+.scenario-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(37, 99, 235, 0.2);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+.scenario-card:active { transform: translateY(0); }
+
+.sc-icon   { flex-shrink: 0; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; color: var(--primary); }
+.sc-info   { flex: 1; display: flex; flex-direction: column; gap: 2px; }
+.sc-info strong { font-size: 0.92rem; font-weight: 700; color: var(--text); letter-spacing: -.15px; }
+.sc-fr     { font-size: 0.75rem; font-style: italic; color: var(--text-muted); }
+.sc-persona{ font-size: 0.7rem; color: var(--text-muted); margin-top: 2px; }
+.sc-diff   { font-size: 0.7rem; font-weight: 600; color: var(--primary); flex-shrink: 0; background: rgba(37,99,235,0.08); padding: 2px 8px; border-radius: 20px; }
+.sc-persona svg { vertical-align: middle; }
+
+/* ══════════════════════════════════════════════
+   채팅 뷰
+   ══════════════════════════════════════════════ */
+#page-roleplay { padding: 0 !important; gap: 0 !important; overflow: hidden; }
+#page-roleplay #scenario-select { padding: 44px 52px; overflow-y: auto; }
+
+#chat-view {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── 상단 바 ── */
+.chat-top-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 22px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+  flex-shrink: 0;
+}
+.chat-back {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--blue);
+  padding: 6px 12px;
+  border-radius: 8px;
+  background: rgba(37, 99, 235, 0.07);
+  transition: background .15s;
+  white-space: nowrap;
+}
+.chat-back:hover { background: rgba(37, 99, 235, 0.13); }
+
+.chat-persona { flex: 1; display: flex; align-items: center; gap: 11px; }
+#chat-persona-emoji { font-size: 1.5rem; }
+.chat-persona strong { font-size: 0.92rem; font-weight: 700; color: var(--text); display: block; letter-spacing: -.15px; }
+.chat-persona span   { font-size: 0.72rem; color: var(--text-muted); }
+
+.chat-reset-btn {
+  font-size: 1rem;
+  color: var(--text-muted);
+  padding: 6px;
+  border-radius: 8px;
+  transition: color .15s, background .15s;
+}
+.chat-reset-btn:hover { color: var(--text); background: rgba(0,0,0,0.04); }
+
+/* ── 팁 바 ── */
+.tip-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 22px;
+  background: rgba(37, 99, 235, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  overflow-x: auto;
+  flex-shrink: 0;
+  scrollbar-width: none;
+}
+.tip-bar::-webkit-scrollbar { display: none; }
+.tip-label { font-size: 0.69rem; font-weight: 600; color: var(--text-muted); flex-shrink: 0; }
+.tip-chips  { display: flex; gap: 5px; }
+.tip-chip {
+  flex-shrink: 0;
+  font-size: 0.69rem;
+  background: rgba(37, 99, 235, 0.07);
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  color: var(--blue);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+/* ── 메시지 영역 ── */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+  background: transparent;
+}
+
+/* ── 채팅 버블 ── */
+.chat-bubble {
+  display: flex;
+  gap: 10px;
+  align-items: flex-end;
+  max-width: 68%;
+}
+.chat-bubble.user   { align-self: flex-end; flex-direction: row-reverse; }
+.chat-bubble.ai     { align-self: flex-start; }
+.chat-bubble.loading-bubble { align-self: flex-start; }
+
+.bubble-avatar {
+  flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.bubble-content { display: flex; flex-direction: column; gap: 4px; }
+.user-content   { align-items: flex-end; }
+
+.bubble-text {
+  padding: 11px 15px;
+  border-radius: 18px;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+.chat-bubble.ai .bubble-text {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-bottom-left-radius: 4px;
+  color: var(--text);
+}
+.chat-bubble.user .bubble-text {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  border-bottom-right-radius: 4px;
+  color: #fff;
+  box-shadow: 0 2px 12px rgba(37, 99, 235, 0.2);
+}
+
+.correction {
+  color: #d97706;
+  font-size: 0.78rem;
+  font-style: italic;
+  display: block;
+  margin-top: 4px;
+}
+
+/* ── 버블 액션 & 번역 ── */
+.bubble-actions { display: flex; gap: 5px; margin-top: 3px; }
+.bubble-translate-btn {
+  font-size: 0.69rem;
+  color: var(--text-muted);
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 6px;
+  padding: 3px 8px;
+  transition: color .15s, background .15s;
+}
+.bubble-translate-btn:hover { color: var(--text); background: rgba(0,0,0,0.07); }
+.bubble-translate-btn:disabled { opacity: .5; cursor: default; }
+
+.bubble-translation {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-style: italic;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 8px;
+  line-height: 1.5;
+  max-width: 320px;
+}
+
+/* ── 타이핑 인디케이터 ── */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 13px 17px;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  border-radius: 18px;
+  border-bottom-left-radius: 4px;
+}
+.typing-indicator span {
+  width: 6px;
+  height: 6px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  animation: typingDot 1.2s infinite;
+}
+.typing-indicator span:nth-child(2) { animation-delay: .2s; }
+.typing-indicator span:nth-child(3) { animation-delay: .4s; }
+@keyframes typingDot {
+  0%,60%,100% { transform: translateY(0); opacity: .4; }
+  30%          { transform: translateY(-5px); opacity: 1; }
+}
+
+/* ── 시스템 메시지 ── */
+.system-msg {
+  align-self: center;
+  font-size: 0.76rem;
+  color: #dc2626;
+  background: rgba(220, 38, 38, 0.06);
+  border: 1px solid rgba(220, 38, 38, 0.15);
+  border-radius: 10px;
+  padding: 8px 16px;
+  text-align: center;
+  max-width: 80%;
+  line-height: 1.5;
+}
+
+/* ── 입력창 ── */
+.chat-input-bar {
+  padding: 10px 20px 14px;
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.chat-quick-phrases {
+  display: flex;
+  gap: 5px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.chat-quick-phrases::-webkit-scrollbar { display: none; }
+
+.quick-chip {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.07);
+  color: var(--text-muted);
+  border-radius: 12px;
+  padding: 4px 11px;
+  transition: all .15s;
+}
+.quick-chip:hover {
+  border-color: rgba(37, 99, 235, 0.25);
+  color: var(--blue);
+  background: rgba(37, 99, 235, 0.06);
+}
+
+.chat-input-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+#chat-input {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 22px;
+  padding: 10px 18px;
+  color: var(--text);
+  font-size: 0.88rem;
+  transition: border-color .15s, box-shadow .15s, background .15s;
+}
+#chat-input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.chat-send-btn {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+  transition: opacity .15s, transform .1s;
+}
+.chat-send-btn:hover  { opacity: .88; }
+.chat-send-btn:active { transform: scale(.9); }
+.chat-send-btn:disabled { opacity: .35; cursor: not-allowed; }
+
+.chat-token-info {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: right;
+  opacity: 0.7;
+}
+
+/* ── 토스트 ── */
+.rp-toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(14px);
+  background: rgba(29, 29, 31, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #fff;
+  border-radius: 20px;
+  padding: 9px 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s, transform .25s;
+  z-index: 500;
+  white-space: nowrap;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.rp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
