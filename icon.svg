@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- Background circle -->
+  <rect width="180" height="180" rx="40" ry="40" fill="#1a1a2e"/>
+
+  <!-- French flag stripes (subtle, inside rounded rect) -->
+  <clipPath id="clip">
+    <rect width="180" height="180" rx="40" ry="40"/>
+  </clipPath>
+  <g clip-path="url(#clip)">
+    <rect x="0"   y="0" width="60"  height="180" fill="#002395" opacity="0.35"/>
+    <rect x="60"  y="0" width="60"  height="180" fill="#ffffff" opacity="0.08"/>
+    <rect x="120" y="0" width="60"  height="180" fill="#ED2939" opacity="0.35"/>
+  </g>
+
+  <!-- Eiffel tower simplified -->
+  <g fill="none" stroke="#ffffff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" opacity="0.9">
+    <!-- top spire -->
+    <line x1="90" y1="28" x2="90" y2="46"/>
+    <!-- upper body -->
+    <line x1="90" y1="46" x2="74" y2="82"/>
+    <line x1="90" y1="46" x2="106" y2="82"/>
+    <!-- first platform -->
+    <line x1="72" y1="82" x2="108" y2="82"/>
+    <!-- middle body -->
+    <line x1="74" y1="82" x2="62" y2="118"/>
+    <line x1="106" y1="82" x2="118" y2="118"/>
+    <!-- arch left -->
+    <path d="M74 82 Q68 100 62 118" fill="none"/>
+    <!-- arch right -->
+    <path d="M106 82 Q112 100 118 118" fill="none"/>
+    <!-- second platform -->
+    <line x1="60" y1="118" x2="120" y2="118"/>
+    <!-- lower body -->
+    <line x1="62" y1="118" x2="50" y2="148"/>
+    <line x1="118" y1="118" x2="130" y2="148"/>
+    <!-- inner lower lines -->
+    <line x1="74" y1="118" x2="68" y2="148"/>
+    <line x1="106" y1="118" x2="112" y2="148"/>
+    <!-- base -->
+    <line x1="48" y1="148" x2="132" y2="148"/>
+  </g>
+
+</svg>

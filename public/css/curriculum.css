@@ -1,0 +1,444 @@
+/* ══════════════════════════════════════════════
+   curriculum.css
+   ══════════════════════════════════════════════ */
+
+.curr-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  background: var(--bg, #f5f5f7);
+}
+
+/* ── 헤더 ─────────────────────────────────── */
+.curr-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 20px 16px;
+  background: #fff;
+  border-radius: 0 0 22px 22px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.curr-header .home-btn {
+  background: none;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  color: #007aff;
+  padding: 8px 12px;
+  border-radius: 10px;
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.curr-header .home-btn:active {
+  background: #f0f4ff;
+}
+
+.curr-header-info {
+  flex: 1;
+}
+
+.curr-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1c1c1e;
+}
+
+.curr-complete {
+  font-size: 13px;
+  color: #8e8e93;
+  margin-top: 2px;
+}
+
+/* ── 유닛 목록 ────────────────────────────── */
+.curr-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── 유닛 카드 ────────────────────────────── */
+.cu-unit {
+  background: #fff;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  transition: border-color 0.2s;
+}
+
+.cu-unit.locked {
+  background: #f5f5f7;
+  opacity: 0.6;
+}
+
+.cu-unit.active {
+  border-color: #007aff;
+  box-shadow: 0 2px 12px rgba(0,122,255,0.18);
+}
+
+.cu-unit.mastered {
+  border-color: #34c759;
+  background: #f6fff8;
+}
+
+/* ── 유닛 상단 ────────────────────────────── */
+.cu-top {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+}
+
+.cu-num {
+  font-size: 13px;
+  font-weight: 700;
+  color: #8e8e93;
+  min-width: 20px;
+}
+
+.cu-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.cu-info {
+  flex: 1;
+}
+
+.cu-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1c1c1e;
+}
+
+.cu-sub {
+  font-size: 12px;
+  color: #8e8e93;
+  margin-top: 1px;
+}
+
+/* ── 뱃지 ─────────────────────────────────── */
+.cu-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.cu-locked { background: #e5e5ea; color: #8e8e93; }
+.cu-done   { background: #d1f5dc; color: #1a7a36; }
+.cu-active { background: #dbeeff; color: #0055cc; }
+.cu-avail  { background: #fff3d6; color: #9a6800; }
+
+/* ── 유닛 본문 (아코디언) ──────────────────── */
+.cu-body {
+  display: none;
+  padding: 0 16px 16px;
+  border-top: 1px solid #f2f2f7;
+}
+.cu-unit.cu-open .cu-body {
+  display: block;
+}
+
+/* 열리고 닫히는 커서 힌트 */
+.cu-unit:not(.locked) .cu-top {
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cu-unit:not(.locked) .cu-top:active {
+  opacity: 0.75;
+}
+
+/* ── 프로그레스 바 ────────────────────────── */
+.cu-prog-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cu-prog-label {
+  font-size: 12px;
+  color: #636366;
+  min-width: 68px;
+}
+
+.cu-bar {
+  flex: 1;
+  height: 7px;
+  background: #e5e5ea;
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.cu-bar-fill {
+  height: 100%;
+  background: #007aff;
+  border-radius: 99px;
+  transition: width 0.4s ease;
+}
+
+.cu-bar-fill.ok {
+  background: #34c759;
+}
+
+.cu-prog-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: #636366;
+  min-width: 34px;
+  text-align: right;
+}
+
+/* ── 요구사항 안내 ────────────────────────── */
+.cu-req {
+  font-size: 11px;
+  color: #aeaeb2;
+  margin-top: 8px;
+}
+
+/* ── 액션 버튼 ────────────────────────────── */
+.cu-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cu-btn {
+  flex: 1;
+  padding: 11px 0;
+  border-radius: 10px;
+  border: none;
+  background: #007aff;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cu-btn:active {
+  background: #0062d6;
+}
+
+/* ── 월별 섹션 ────────────────────────────── */
+.cu-month-section {
+  margin-bottom: 8px;
+}
+
+.cu-month-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #8e8e93;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 4px 6px;
+}
+
+/* ── 잠긴 롤플레이 시나리오 ───────────────── */
+.sc-locked {
+  opacity: 0.5;
+  cursor: default;
+  pointer-events: none;
+}
+
+.sc-lock-icon {
+  filter: grayscale(1);
+}
+
+.sc-unlock-hint {
+  font-size: 11px;
+  color: #8e8e93;
+  margin-top: 2px;
+}
+
+/* ══════════════════════════════════════════════
+   0단계 카드
+   ══════════════════════════════════════════════ */
+.cu-unit-zero {
+  border: 2px solid #2E6FD8;
+  background: linear-gradient(135deg, #EEF2FF 0%, #fff 100%);
+}
+.cu-unit-zero:active { opacity: 0.85; }
+.cu-unit-zero .cu-num {
+  background: #2E6FD8;
+  color: #fff;
+  border-radius: 6px;
+  padding: 2px 7px;
+}
+.cu-unit-zero .cu-body {
+  padding-top: 12px;
+}
+.cu-zero-desc {
+  font-size: 0.82rem;
+  color: #4B5563;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+
+/* ══════════════════════════════════════════════
+   튜토리얼 뷰
+   ══════════════════════════════════════════════ */
+.cu-tut-back {
+  background: none;
+  border: none;
+  font-size: 0.88rem;
+  color: #2E6FD8;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  white-space: nowrap;
+}
+.cu-tut-body {
+  padding: 16px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.cu-tut-section {
+  background: #fff;
+  border-radius: 16px;
+  padding: 18px 16px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+}
+.cu-tut-section-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #1A1A2E;
+  margin-bottom: 12px;
+}
+.cu-tut-subsection {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #2E6FD8;
+  margin: 14px 0 6px;
+}
+.cu-tut-p {
+  font-size: 0.85rem;
+  color: #374151;
+  line-height: 1.65;
+  margin: 0 0 8px;
+}
+.cu-tut-hint {
+  font-size: 0.8rem;
+  color: #6B7280;
+  background: #F9FAFB;
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 8px;
+  line-height: 1.55;
+}
+.cu-tut-rule-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: #F0F4FF;
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+.cu-tut-rule {
+  font-size: 0.82rem;
+  color: #374151;
+  line-height: 1.55;
+}
+.cu-tut-tag {
+  display: inline-block;
+  background: #2E6FD8;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-right: 6px;
+  vertical-align: middle;
+  letter-spacing: 0.03em;
+}
+/* 테이블 */
+.cu-tut-tbl {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  margin-top: 4px;
+}
+.cu-tut-tbl th, .cu-tut-tbl td {
+  padding: 7px 10px;
+  border: 1px solid #E5E7EB;
+  vertical-align: top;
+  line-height: 1.5;
+}
+.cu-tut-tbl th {
+  background: #EEF2FF;
+  font-weight: 700;
+  color: #2E6FD8;
+  font-size: 0.75rem;
+}
+.cu-tut-tbl tr:nth-child(even) td { background: #F9FAFB; }
+/* 예시 */
+.cu-tut-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 6px 0;
+}
+.cu-tut-ex {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+}
+.ex-fr { font-weight: 700; color: #1A1A2E; min-width: 120px; }
+.ex-arrow { color: #9CA3AF; }
+.ex-sound { color: #374151; }
+/* 문장 구조 시각화 */
+.cu-tut-sent-box {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0;
+}
+.cu-tut-sent {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+}
+.s-part {
+  font-size: 0.85rem;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 3px 8px;
+}
+.s-part.subj { background: #DBEAFE; color: #1D4ED8; }
+.s-part.verb { background: #D1FAE5; color: #065F46; }
+.s-part.neg  { background: #FEE2E2; color: #DC2626; }
+.s-part.rest { background: #F3F4F6; color: #374151; }
+.s-ko { font-size: 0.78rem; color: #6B7280; margin-left: 4px; }
+/* 완료 버튼 */
+.cu-tut-done-btn-wrap { text-align: center; margin-top: 8px; }
+.cu-tut-done-btn {
+  background: #2E6FD8;
+  color: #fff;
+  border: none;
+  border-radius: 99px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(46,111,216,0.3);
+}
